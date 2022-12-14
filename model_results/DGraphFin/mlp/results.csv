@@ -1,0 +1,2 @@
+,lr,num_layers,hidden_channels,dropout,batchnorm,l2,train,train_std,valid,valid_std,test,test_std
+mlp,0.01,2,128,0.0,False,5e-07,72.1234,0.0912,71.2699,0.0924,71.8815,0.0858
