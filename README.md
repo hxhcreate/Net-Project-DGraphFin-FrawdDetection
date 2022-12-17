@@ -60,3 +60,16 @@ Performance on **DGraphFin**(10 runs):
 | GAT (NeighborSampler)        | 0.7396 ± 0.0018 | 0.7233 ± 0.0012 | 0.7333 ± 0.0024 |
 | GATv2 (NeighborSampler)      | 0.7698 ± 0.0083 | 0.7526 ± 0.0089 | 0.7624 ± 0.0081 |
 | SIGN | 
+
+## MyResults:
+Performance on **DGraphFin**(10 runs):
+
+| Methods   | Train AUC  | Valid AUC  | Test AUC  |
+|  :----  | ----  |  ---- | ---- |
+| MLP | 0.7212 ± 0.0091 | 0.7126 ± 0.0092 | 0.7188 ± 0.0086 |
+| GCN | 0.7108 ± 0.0027 | 0.7079 ± 0.0027 | 0.7079 ± 0.0023 |
+| GraphSAGE| 0.7678 ± 0.0014 | 0.7547 ± 0.0013 | 0.7620 ± 0.0017 |
+| GraphSAGE (NeighborSampler)  | 0.7862 ± 0.0013 | 0.7680 ± 0.0005 | **0.7764 ± 0.0018** |
+| GAT (NeighborSampler)        | 0.7396 ± 0.0018 | 0.7233 ± 0.0012 | 0.7333 ± 0.0024 |
+| GATv2 (NeighborSampler)      | 0.7698 ± 0.0083 | 0.7526 ± 0.0089 | 0.7624 ± 0.0081 |
+| SIGN | 
