@@ -1,0 +1,2 @@
+,lr,num_layers,hidden_size,dropout,dropedge_rate,nhop,l2,train,train_std,valid,valid_std,test,test_std
+sign,0.01,2,128,0.0,0.2,3,5e-07,77.2373,0.2803,75.5652,0.184,76.946,0.3002
