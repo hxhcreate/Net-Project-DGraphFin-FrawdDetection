@@ -61,8 +61,6 @@ def Dgraph_Dataloader(datapath):
     return x,edge_index,y,train_mask,valid_mask,test_mask
         
 
-
-
 def read_dgraphfin(folder):
     print('read_dgraphfin')
     names = ['dgraphfin.npz']

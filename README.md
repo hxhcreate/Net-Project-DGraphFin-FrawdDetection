@@ -45,7 +45,11 @@ python gnn_mini_batch.py --model gatv2_neighsampler --dataset DGraphFin --epochs
 
 - **SIGN**
 ```bash
-python gnn_cogdl.py --model sign --dataset DGraphFin --epochs 200 --runs 10 --device 0
+python gnn.py --model sign --dataset DGraphFin --epochs 200 --runs 10 --device 0
+```
+- **GearSage**
+```bash
+python gnn.py --model gearsage --dataset DGraphFin --epochs 200 --runs 10 --device 0
 ```
 
 ## Results:
