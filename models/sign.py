@@ -48,7 +48,6 @@ class SIGN(BaseModel):
         parser.add_argument("--diffusion", type=str, default="ppr")
         # fmt: on
 
-
     def __init__(
         self,
         num_features,

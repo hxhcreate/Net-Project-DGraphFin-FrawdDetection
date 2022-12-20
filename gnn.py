@@ -1,10 +1,12 @@
 # dataset name: DGraphFin
 
-from utils import DGraphFin
+from utils import DGraphFin, Dgraph_Dataloader
 from utils.utils import prepare_folder
 from utils.evaluator import Evaluator
-from models import MLP, MLPLinear, GCN, SAGE, GAT, GATv2
+from models import MLP, MLPLinear, GCN, SAGE, GAT, GATv2, SIGN
 from logger import Logger
+
+from cogdl.data import Graph
 
 import argparse
 
@@ -43,15 +45,26 @@ sage_parameters = {'lr':0.01
               , 'l2':5e-7
              }
 
+sign_parameters = {'lr': 0.01
+                , 'num_layers': 2
+                , 'hidden_size': 128
+                , 'dropout': 0.0
+                , 'dropedge_rate': 0.2
+                , 'nhop': 3
+                , 'l2': 5e-7
+    }
 
-def train(model, data, train_idx, optimizer, no_conv=False):
+def train(model, data, train_idx, optimizer, model_name, no_conv=False):
     # data.y is labels of shape (N, ) 
     model.train()
     optimizer.zero_grad()
     if no_conv:
         out = model(data.x[train_idx])
     else:
-        out = model(data.x, data.adj_t)[train_idx]
+        if model_name == "sign":
+            out = model(data)[train_idx]      
+        else:
+            out = model(data.x, data.adj_t)[train_idx]
     loss = F.nll_loss(out, data.y[train_idx])
     loss.backward()
     optimizer.step()
@@ -100,13 +113,21 @@ def main():
     device = f'cuda:{args.device}' if torch.cuda.is_available() else 'cpu'
     device = torch.device(device)
 
-    dataset = DGraphFin(root='./dataset/', name=args.dataset, transform=T.ToSparseTensor())
+    if args.model == "sign":
+        datapath = 'dataset/DGraphFin/raw/dgraphfin.npz'
+        x,edge_index,y,train_mask,valid_mask,test_mask = Dgraph_Dataloader(datapath)
+        data = Graph(x=x, edge_index=edge_index, y=y, train_mask=train_mask, val_mask=valid_mask, test_mask=test_mask)
+    else:
+        dataset = DGraphFin(root='./dataset/', name=args.dataset, transform=T.ToSparseTensor())
+        data = dataset[0]
     
-    nlabels = dataset.num_classes
+    if args.model != "sign":
+        data.adj_t = data.adj_t.to_symmetric()
+    
+    nlabels = 2
     if args.dataset in ['DGraphFin']: nlabels = 2
         
-    data = dataset[0]
-    data.adj_t = data.adj_t.to_symmetric()
+
         
     if args.dataset in ['DGraphFin']:
         x = data.x
@@ -115,7 +136,7 @@ def main():
     if data.y.dim()==2:
         data.y = data.y.squeeze(1)        
     
-    split_idx = {'train':data.train_mask, 'valid':data.valid_mask, 'test':data.test_mask}
+    split_idx = {'train':data.train_mask, 'valid':data.val_mask, 'test':data.test_mask}
 
     fold = args.fold
     if split_idx['train'].dim()>1 and split_idx['train'].shape[1] >1:
@@ -151,7 +172,13 @@ def main():
         model_para.pop('lr')
         model_para.pop('l2')        
         model = SAGE(in_channels = data.x.size(-1), out_channels = nlabels, **model_para).to(device)
-
+    if args.model == "sign":
+        para_dict = sign_parameters
+        model_para = sign_parameters.copy()
+        model_para.pop('lr')
+        model_para.pop('l2')        
+        model = SIGN(num_features=data.x.size(-1), num_classes=nlabels, **model_para).to(device)
+    
     print(f'Model {args.model} initialized')
 
     evaluator = Evaluator(eval_metric)
@@ -169,7 +196,7 @@ def main():
         best_out = None
 
         for epoch in range(1, args.epochs+1):
-            loss = train(model, data, train_idx, optimizer, no_conv)
+            loss = train(model, data, train_idx, optimizer,args.model, no_conv)
             eval_results, losses, out = test(model, data, split_idx, evaluator, no_conv)
             train_eval, valid_eval, test_eval = eval_results['train'], eval_results['valid'], eval_results['test']
             train_loss, valid_loss, test_loss = losses['train'], losses['valid'], losses['test']

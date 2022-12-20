@@ -86,7 +86,7 @@ def read_dgraphfin(folder):
 
     data = Data(x=x, edge_index=edge_index, edge_attr=edge_type, y=y)
     data.train_mask = train_mask
-    data.valid_mask = valid_mask
+    data.val_mask = valid_mask
     data.test_mask = test_mask
 
     return data
