@@ -6,6 +6,8 @@ from .gat import GAT, GATv2
 from .gat_neighsampler import GAT_NeighSampler, GATv2_NeighSampler
 
 from .sign import SIGN
+from .gearsage import GEARSage
+
 
 
 

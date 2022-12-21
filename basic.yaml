@@ -234,4 +234,4 @@ dependencies:
     - websocket-client==1.4.2
     - werkzeug==2.2.2
     - zipp==3.11.0
-prefix: /home1/hxh/app/miniconda3/envs/basic
+prefix: /home/hxh/app/miniconda3/envs/basic

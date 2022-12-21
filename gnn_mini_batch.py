@@ -3,9 +3,10 @@
 from utils import DGraphFin
 from utils.utils import prepare_folder
 from utils.evaluator import Evaluator
+from utils.logger import Logger
 from torch_geometric.data import NeighborSampler
 from models import SAGE_NeighSampler, GAT_NeighSampler, GATv2_NeighSampler
-from logger import Logger
+
 from tqdm import tqdm
 
 import argparse

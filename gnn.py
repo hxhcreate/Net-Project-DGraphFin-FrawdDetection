@@ -4,7 +4,7 @@ from utils import DGraphFin, Dgraph_Dataloader
 from utils.utils import prepare_folder
 from utils.evaluator import Evaluator
 from models import MLP, MLPLinear, GCN, SAGE, GAT, GATv2, SIGN
-from logger import Logger
+from utils.logger import Logger
 
 from cogdl.data import Graph
 
