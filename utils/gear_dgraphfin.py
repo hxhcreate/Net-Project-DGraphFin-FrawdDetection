@@ -30,7 +30,7 @@ def edge_timestamp_feat(edge_timestamp, edge_index, x):
     edge_timestamp_min = edge_timestamp_adj.min(axis=1).todense()
     return (
         edge_timestamp_mean,
-        preprocessing.normalize(edge_timestamp_sum),
+        preprocessing.normalize(np.asarray(edge_timestamp_sum)),
         np.log(edge_timestamp_max + 1),
         np.log(edge_timestamp_min + 1),
     )
