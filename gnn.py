@@ -54,6 +54,14 @@ sign_parameters = {'lr': 0.01
                 , 'l2': 5e-7
     }
 
+gear_parameters = {'lr': 0.01
+                , 'num_layers': 2
+                , 'hidden_size': 128
+                , 'dropout': 0.3
+                , 'nhop': 3
+                , 'l2': 5e-7
+}
+
 def train(model, data, train_idx, optimizer, model_name, no_conv=False):
     # data.y is labels of shape (N, ) 
     model.train()

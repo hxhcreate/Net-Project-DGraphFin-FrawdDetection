@@ -59,7 +59,7 @@ python gnn.py --model sign --dataset DGraphFin --epochs 200 --runs 10 --device 0
 ```
 - **GearSage**
 ```bash
-python gear.py --model GEARSage --dataset DGraphFin --epochs 200 --device 0
+python gear_gnn.py --model gear --dataset DGraphFin --epochs 100 --device 0
 ```
 
 
