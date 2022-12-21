@@ -17,7 +17,7 @@ Python environment:
 - cogdl = 0.5.3
 - pyg-lib = 0.1.0+pt113cu116
 
-CPU environment:
+GPU environment:
 - GPU: RTX A5000 24G  * 1
 
 
