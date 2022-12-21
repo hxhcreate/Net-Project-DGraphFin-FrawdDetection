@@ -97,7 +97,7 @@ def main():
     parser.add_argument('--log_steps', type=int, default=10)
     parser.add_argument('--model', type=str, default='gear')
     parser.add_argument('--use_embeddings', action='store_true')
-    parser.add_argument('--epochs', type=int, default=100)
+    parser.add_argument('--epochs', type=int, default=200)
     parser.add_argument('--runs', type=int, default=10)
     parser.add_argument('--fold', type=int, default=0)
     

@@ -23,6 +23,16 @@ CPU environment:
 
 ## Training
 
+- **GearSage**
+```bash
+python gear_gnn.py --model gear --dataset DGraphFin --epochs 200 --runs 10 --device 0
+```
+
+- **SIGN**
+```bash
+python gnn.py --model sign --dataset DGraphFin --epochs 200 --runs 10 --device 0
+```
+
 - **MLP**
 ```bash
 python gnn.py --model mlp --dataset DGraphFin --epochs 200 --runs 10 --device 0
@@ -53,29 +63,28 @@ python gnn_mini_batch.py --model gat_neighsampler --dataset DGraphFin --epochs 2
 python gnn_mini_batch.py --model gatv2_neighsampler --dataset DGraphFin --epochs 200 --runs 10 --device 0
 ```
 
-- **SIGN**
-```bash
-python gnn.py --model sign --dataset DGraphFin --epochs 200 --runs 10 --device 0
-```
-- **GearSage**
-```bash
-python gear_gnn.py --model gear --dataset DGraphFin --epochs 100 --device 0
-```
 
 
 ## MyResults:
 Performance on **DGraphFin**(10 runs) (%):
+(ranked by test AUC )
 
-| Methods   | Train AUC  | Valid AUC  | Test AUC  |
-|  :----  | ----  |  ---- | ---- |
-| MLP | 72.1234 ± 0.0912 | 71.2699 ± 0.0924 | 71.8815 ± 0.0858 |
-| GCN | 71.0831 ± 0.3224 | 70.7958 ± 0.3028 | 70.7996 ± 0.2721 |
-| GraphSAGE| 76.7854 ± 0.1881  | 75.4739 ± 0.1894 | 76.2051 ± 0.2010 |
-| GraphSAGE (NeighborSampler)  | 78.6245 ± 0.1391 | 76.8072 ± 0.08 | **77.6441 ± 0.1343** |
-| GAT (NeighborSampler)        | 74.2509 ± 0.3803 | 72.5287 ± 0.2654 | 73.6141 ± 0.3018 |
-| GATv2 (NeighborSampler)      | 76.3698 ± 0.7377 | 74.7529 ± 0.788 | 75.7034 ± 0.6571 |
-| SIGN | 77.2373 ± 0.2803 | 75.5652 ± 0.1840 | 76.9460 ± 0.3002 |
-| GEARSAGE | | |
+| rk | Methods   | Train AUC  | Valid AUC  | Test AUC  |
+|  :----  | ----  |  ---- | ---- | ---- |
+| 1 | GEARSAGE | 84.7251 ± 0.0776 | 83.3331 ±  0.0747 | **84.1887 ± 0.0565** |
+| 2 | GraphSAGE (NeighborSampler)  | 78.6245 ± 0.1391 | 76.8072 ± 0.08 | 77.6441 ± 0.1343 |
+| 3 | SIGN | 77.2373 ± 0.2803 | 75.5652 ± 0.1840 | 76.9460 ± 0.3002 |
+| 4 | GraphSAGE| 76.7854 ± 0.1881  | 75.4739 ± 0.1894 | 76.2051 ± 0.2010 |
+| 5 | GATv2 (NeighborSampler)      | 76.3698 ± 0.7377 | 74.7529 ± 0.788 | 75.7034 ± 0.6571 |
+| 6 | GAT (NeighborSampler)        | 74.2509 ± 0.3803 | 72.5287 ± 0.2654 | 73.6141 ± 0.3018 |
+| 7 | MLP | 72.1234 ± 0.0912 | 71.2699 ± 0.0924 | 71.8815 ± 0.0858 |
+| 8 | GCN | 71.0831 ± 0.3224 | 70.7958 ± 0.3028 | 70.7996 ± 0.2721 |
+
+
+
+
+
+
 
 
 ## Results from [Origin Repo](https://github.com/DGraphXinye/DGraphFin_baseline):
